@@ -15,7 +15,7 @@ Bundler.require(:default)
 configure do
 	enable :sessions
 	set :json_encoder, :to_json
-	set :erb, :layout => :layout
+	set :erb, :layout => false
 
 end
 

@@ -4,8 +4,7 @@ require 'json'
 #
 # => Return web app UI.
 get '/' do
-	content_type :json
-	{ :key1 => 'value1', :key2 => 'value2' }.to_json
+	erb :index
 end
 
 get '/api/bridges' do
