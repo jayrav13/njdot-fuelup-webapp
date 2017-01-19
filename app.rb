@@ -7,7 +7,7 @@ require 'sinatra/json'
 require 'sinatra/cookies'
 require 'sinatra/flash'
 require './controller'
-require './model'
+# require './model'
 require './assets'
 require './helpers'
 Bundler.require(:default)
