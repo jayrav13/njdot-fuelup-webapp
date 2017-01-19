@@ -13,19 +13,20 @@
 	</div>
 
 	<div ng-if="data != null">
-	<table class="table table-hover">
+	<table class="text-center table table-hover" style=" table-layout: fixed; ">
 		<thead>
-			<tr>
-				<td>Address</td>
-				<td>Distance</td>
-				<td>Go</td>
+			<tr class="text-center">
+				<th class="text-center">Station</th>
+				<th class="text-center">Distance</th>
+				<th class="text-center">Navigate</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="station in data.data">
-			<td>{{ station["Address"] }}</td>
-			<td>0 mi</td>
-			<td><a type="button" href="comgooglemaps://?center=40.765819,-73.975866&zoom=14&views=traffic">Go</a></td>
+			<td>{{ station.Name }}</td>
+			<td ng-if="station.distance != null">{{ station.distance.toFixed(2) }} mi</td>
+			<td ng-if="station.distance == null"> - </td>
+			<td><a target="_BLANK" type="button" href="http://maps.google.com/maps?saddr={{ position.coords.latitude }},{{ position.coords.longitude }}&daddr={{ station['Latitude'] }},{{ station['Longitude'] }}">Go</a></td>
 			</tr>
 		</tbody>
 	</table>
