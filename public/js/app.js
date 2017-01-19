@@ -5,7 +5,7 @@ var fuelApp = angular.module("fuelApp", [
 	"Locations"
 ]);
 
-fuelApp.config(function($routeProvider) {
+fuelApp.config(function($routeProvider, $locationProvider) {
 	$routeProvider
 	.when("/", {
 		templateUrl: "/js/views/home.html",
@@ -19,6 +19,7 @@ fuelApp.config(function($routeProvider) {
 		templateUrl: "/js/views/bridges.html",
 		controller: "BridgesController"
 	});
+
 });
 
 fuelApp.run(function($rootScope, $location, $window) {

@@ -1,7 +1,7 @@
 [
   {
     "Name": "Buena DOT",
-    "Latitutde": 39.51554447,
+    "Latitude": 39.51554447,
     "Longitude": -74.92849165,
     "Address": "Rt. 40 near Catherine Avenue",
     "City": "Buena",
@@ -13,7 +13,7 @@
   },
   {
     "Name": "Buena Vista State Police",
-    "Latitutde": 39.57795,
+    "Latitude": 39.57795,
     "Longitude": -74.868281,
     "Address": "1045 Rt. 54 South of Rt. 322",
     "City": "Buena Vista Township",
@@ -25,7 +25,7 @@
   },
   {
     "Name": "Hammonton Motor Pool",
-    "Latitutde": 39.65486598,
+    "Latitude": 39.65486598,
     "Longitude": -74.79584455,
     "Address": "253-D North White Horse Pike",
     "City": "Hammonton",
@@ -37,7 +37,7 @@
   },
   {
     "Name": "Mays Landing DOT",
-    "Latitutde": 39.47751148,
+    "Latitude": 39.47751148,
     "Longitude": -74.70172997,
     "Address": "5837 Apple Street",
     "City": "Mays Landing",
@@ -49,7 +49,7 @@
   },
   {
     "Name": "Pomona DOT",
-    "Latitutde": 39.45960788,
+    "Latitude": 39.45960788,
     "Longitude": -74.54338501,
     "Address": "Rt. 30 & W. McKinley Avenue",
     "City": "Pomona",
@@ -61,7 +61,7 @@
   },
   {
     "Name": "Lodi DOT",
-    "Latitutde": 40.88844460,
+    "Latitude": 40.88844460,
     "Longitude": -74.07202900,
     "Address": "Gregg St. 1 block off Rt. 17",
     "City": "Lodi",
@@ -73,7 +73,7 @@
   },
   {
     "Name": "Ramsey DOT",
-    "Latitutde": 41.06565227,
+    "Latitude": 41.06565227,
     "Longitude": -74.12047012,
     "Address": "15 Arrow Road",
     "City": "Ramsey",
@@ -85,7 +85,7 @@
   },
   {
     "Name": "Bordentown DOT",
-    "Latitutde": 40.13178135,
+    "Latitude": 40.13178135,
     "Longitude": -74.71658907,
     "Address": "Dunns Mill Rd. off Rt. 130",
     "City": "Bordentown",
@@ -97,7 +97,7 @@
   },
   {
     "Name": "Edgewater Park DOT",
-    "Latitutde": 40.04082858,
+    "Latitude": 40.04082858,
     "Longitude": -74.91620151,
     "Address": "Rt. 130 & Mt. Holly Rd. ",
     "City": "Edgewater Park",
@@ -109,7 +109,7 @@
   },
   {
     "Name": "Mt. Laurel DOT",
-    "Latitutde": 39.96744662,
+    "Latitude": 39.96744662,
     "Longitude": -74.88930386,
     "Address": "Rt. 38 East, 1/4 mile East of Rt. 295",
     "City": "Mt. Laurel",
@@ -121,7 +121,7 @@
   },
   {
     "Name": "Southampton DOT",
-    "Latitutde": 39.88907707,
+    "Latitude": 39.88907707,
     "Longitude": -74.74474718,
     "Address": "Rt. 70 West of Rt. 206 at Red Lion Circle",
     "City": "Southampton",
@@ -133,7 +133,7 @@
   },
   {
     "Name": "Berlin DOT",
-    "Latitutde": 39.80369329,
+    "Latitude": 39.80369329,
     "Longitude": -74.93442722,
     "Address": "36 Walker Avenue",
     "City": "Berlin",
@@ -145,7 +145,7 @@
   },
   {
     "Name": "Cherry Hill DOT",
-    "Latitutde": 39.90389152,
+    "Latitude": 39.90389152,
     "Longitude": -74.98461145,
     "Address": "Frontage Road & Rt. 70 near Rt. 295",
     "City": "Cherry Hill",
@@ -157,7 +157,7 @@
   },
   {
     "Name": "Pennsauken DOT",
-    "Latitutde": 39.94934153,
+    "Latitude": 39.94934153,
     "Longitude": -75.07126805,
     "Address": "3750 Rt. 130 & Federal St. Ramp Southbound",
     "City": "Pennsauken",
@@ -169,7 +169,7 @@
   },
   {
     "Name": "Middle Township DOT",
-    "Latitutde": 39.02916768,
+    "Latitude": 39.02916768,
     "Longitude": -74.86327371,
     "Address": "Rt. 9 & W. Edgewood Ave.",
     "City": "Rio Grande",
@@ -181,7 +181,7 @@
   },
   {
     "Name": "North Wildwood State Police",
-    "Latitutde": 39.007403,
+    "Latitude": 39.007403,
     "Longitude": -74.791143,
     "Address": "1st & Central Ave.",
     "City": "North Wildwood",
@@ -193,7 +193,7 @@
   },
   {
     "Name": "Petersburg DOT",
-    "Latitutde": 39.25964713,
+    "Latitude": 39.25964713,
     "Longitude": -74.73066206,
     "Address": "400 Old Tuckahoe Road",
     "City": "Petersburg",
@@ -205,7 +205,7 @@
   },
   {
     "Name": "Woodbine Dev. Center",
-    "Latitutde": 39.23413958,
+    "Latitude": 39.23413958,
     "Longitude": -74.80345129,
     "Address": "1175 DeHirsch Ave. & Fantail ",
     "City": "Woodbine",
@@ -217,7 +217,7 @@
   },
   {
     "Name": "Bayside Facility",
-    "Latitutde": 39.23339997,
+    "Latitude": 39.23339997,
     "Longitude": -74.96568202,
     "Address": "4294 Rt. 47",
     "City": "Leesburg",
@@ -229,7 +229,7 @@
   },
   {
     "Name": "Cumberland DOT",
-    "Latitutde": 39.36417407,
+    "Latitude": 39.36417407,
     "Longitude": -74.93084981,
     "Address": "Rt. 49 & Hesstown Rd.",
     "City": "Cumberland",
@@ -241,7 +241,7 @@
   },
   {
     "Name": "Port Norris State Police",
-    "Latitutde": 39.28804,
+    "Latitude": 39.28804,
     "Longitude": -75.012461,
     "Address": "8861 Highland Street",
     "City": "Port Norris",
@@ -253,7 +253,7 @@
   },
   {
     "Name": "Southwoods State Prison",
-    "Latitutde": 39.41498116,
+    "Latitude": 39.41498116,
     "Longitude": -75.21248817,
     "Address": "1 N. Industrial Blvd & 215 S. Burlington Rd.",
     "City": "Bridgeton",
@@ -265,7 +265,7 @@
   },
   {
     "Name": "Vineland DOT",
-    "Latitutde": 39.45778852,
+    "Latitude": 39.45778852,
     "Longitude": -75.04187987,
     "Address": "1959 Delsea Dr. & West Elmer Rd.",
     "City": "Vineland",
@@ -277,7 +277,7 @@
   },
   {
     "Name": "Newark DOT",
-    "Latitutde": 40.70941990,
+    "Latitude": 40.70941990,
     "Longitude": -74.17571162,
     "Address": "Jct. Rts. 1,9,21,22",
     "City": "Newark",
@@ -289,7 +289,7 @@
   },
   {
     "Name": "West Orange DOT",
-    "Latitutde": 40.78366162,
+    "Latitude": 40.78366162,
     "Longitude": -74.27598034,
     "Address": "1255 Pleasant Valley Way at National Guard Armory",
     "City": "West Orange",
@@ -301,7 +301,7 @@
   },
   {
     "Name": "Bridgeport DOT",
-    "Latitutde": 39.80411480,
+    "Latitude": 39.80411480,
     "Longitude": -75.34441319,
     "Address": "Rts. 130 & 322",
     "City": "Bridgeport",
@@ -313,7 +313,7 @@
   },
   {
     "Name": "Deptford DOT",
-    "Latitutde": 39.83225320,
+    "Latitude": 39.83225320,
     "Longitude": -75.09148157,
     "Address": "Superior Way off Rt. 41 at Rt. 42",
     "City": "Deptford",
@@ -325,7 +325,7 @@
   },
   {
     "Name": "Glassboro DOT",
-    "Latitutde": 39.69656522,
+    "Latitude": 39.69656522,
     "Longitude": -75.10849719,
     "Address": "126 Grove Street at Rt. 47",
     "City": "Glassboro",
@@ -337,7 +337,7 @@
   },
   {
     "Name": "West Deptford DOT",
-    "Latitutde": 39.86494376,
+    "Latitude": 39.86494376,
     "Longitude": -75.14575114,
     "Address": "1140 Crown Point Rd. at MP 24 & 25",
     "City": "Westville",
@@ -349,7 +349,7 @@
   },
   {
     "Name": "Jersey City DOT",
-    "Latitutde": 40.73686317,
+    "Latitude": 40.73686317,
     "Longitude": -74.08018562,
     "Address": "401 Rts. 1&9 Truck Rte Southbound",
     "City": "Jersey City",
@@ -361,7 +361,7 @@
   },
   {
     "Name": "Bloomsbury DOT",
-    "Latitutde": 40.66078600,
+    "Latitude": 40.66078600,
     "Longitude": -75.06664165,
     "Address": "1000 Rt. 173",
     "City": "Bloomsbury",
@@ -373,7 +373,7 @@
   },
   {
     "Name": "Clinton Point DOT",
-    "Latitutde": 40.64038353,
+    "Latitude": 40.64038353,
     "Longitude": -74.88898107,
     "Address": "84 Beaver Ave.",
     "City": "Clinton",
@@ -385,7 +385,7 @@
   },
   {
     "Name": "Flemington DOT",
-    "Latitutde": 40.50922972,
+    "Latitude": 40.50922972,
     "Longitude": -74.85131465,
     "Address": "Rt. 31 at Railroad Crossing",
     "City": "Flemington",
@@ -397,7 +397,7 @@
   },
   {
     "Name": "West Amwell DOT",
-    "Latitutde": 40.38549512,
+    "Latitude": 40.38549512,
     "Longitude": -74.91528086,
     "Address": "1406 Rt. 179",
     "City": "West Amwell",
@@ -409,7 +409,7 @@
   },
   {
     "Name": "Eggerts Crossing Garage",
-    "Latitutde": 40.27274199,
+    "Latitude": 40.27274199,
     "Longitude": -74.74666088,
     "Address": "161 Eggerts Crossing Rd.",
     "City": "Lawrenceville",
@@ -421,7 +421,7 @@
   },
   {
     "Name": "Fernwood DOT",
-    "Latitutde": 40.25685605,
+    "Latitude": 40.25685605,
     "Longitude": -74.79821311,
     "Address": "999 Parkway Ave.",
     "City": "Trenton",
@@ -433,7 +433,7 @@
   },
   {
     "Name": "Hamilton DOT",
-    "Latitutde": 40.20476792,
+    "Latitude": 40.20476792,
     "Longitude": -74.63589228,
     "Address": "2779 Kuser Road",
     "City": "Hamilton",
@@ -444,20 +444,8 @@
     "Type of Gas": "Unleaded / Diesel"
   },
   {
-    "Name": "Hamilton State Police",
-    "Latitutde": null,
-    "Longitude": null,
-    "Address": "1400 Negron Drive",
-    "City": "Trenton",
-    "State": "NJ",
-    "County": "Mercer",
-    "Hours": "7:00 AM - 7:00 PM",
-    "Phone Number": "609-584-5000",
-    "Type of Gas": "Unleaded"
-  },
-  {
     "Name": "Lawrence Twp. DOT",
-    "Latitutde": 40.26535133,
+    "Latitude": 40.26535133,
     "Longitude": -74.71632132,
     "Address": "2798 Brunswick Avenue",
     "City": "Lawrenceville",
@@ -469,7 +457,7 @@
   },
   {
     "Name": "Washington Twp. DOT",
-    "Latitutde": 40.24521913,
+    "Latitude": 40.24521913,
     "Longitude": -74.56851629,
     "Address": "Rt. 130 & Voelbel Rd. ",
     "City": "Washington Twp.",
@@ -481,7 +469,7 @@
   },
   {
     "Name": "West Trenton DOT",
-    "Latitutde": 40.27645795,
+    "Latitude": 40.27645795,
     "Longitude": -74.82595939,
     "Address": "780 Bear Tavern Road",
     "City": "West Trenton",
@@ -493,7 +481,7 @@
   },
   {
     "Name": "College Farm DOT",
-    "Latitutde": 40.46633234,
+    "Latitude": 40.46633234,
     "Longitude": -74.43153684,
     "Address": "Rt. 1 NB at College Farm Road",
     "City": "North Brunswick",
@@ -505,7 +493,7 @@
   },
   {
     "Name": "East Brunswick Public Works",
-    "Latitutde": 40.44609,
+    "Latitude": 40.44609,
     "Longitude": -74.407853,
     "Address": "4 Harts Lane",
     "City": "East Brunswick",
@@ -517,7 +505,7 @@
   },
   {
     "Name": "Keasbey/Woodbridge DOT",
-    "Latitutde": 40.51805278,
+    "Latitude": 40.51805278,
     "Longitude": -74.30968803,
     "Address": "Smith St. off Rt. 440 to 90 Crows Mill Road",
     "City": "Keasbey",
@@ -529,7 +517,7 @@
   },
   {
     "Name": "Sand Hill DOT",
-    "Latitutde": 40.41112755,
+    "Latitude": 40.41112755,
     "Longitude": -74.54426021,
     "Address": "3919 Rt. 1",
     "City": "Monmouth Junction",
@@ -541,7 +529,7 @@
   },
   {
     "Name": "Sayreville DOT",
-    "Latitutde": 40.49016916,
+    "Latitude": 40.49016916,
     "Longitude": -74.30029538,
     "Address": "25 Melrose Avenue",
     "City": "Sayreville",
@@ -553,7 +541,7 @@
   },
   {
     "Name": "Woodbridge Dev. Center",
-    "Latitutde": 40.58335914,
+    "Latitude": 40.58335914,
     "Longitude": -74.26800727,
     "Address": "1277 Rahway Avenue",
     "City": "Woodbridge",
@@ -565,7 +553,7 @@
   },
   {
     "Name": "Freehold DOT",
-    "Latitutde": 40.24369762,
+    "Latitude": 40.24369762,
     "Longitude": -74.2713046,
     "Address": "200 Daniels Way off Rt. 79",
     "City": "Freehold",
@@ -577,7 +565,7 @@
   },
   {
     "Name": "Hazlet DOT",
-    "Latitutde": 40.422786,
+    "Latitude": 40.422786,
     "Longitude": -74.209831,
     "Address": "370 Clark Street ",
     "City": "Hazlet",
@@ -589,7 +577,7 @@
   },
   {
     "Name": "Ocean Twp. DOT",
-    "Latitutde": 40.23280082,
+    "Latitude": 40.23280082,
     "Longitude": -74.06037254,
     "Address": "100 Bowne Rd. at Rt. 66",
     "City": "Ocean Township",
@@ -601,7 +589,7 @@
   },
   {
     "Name": "Wall Twp. DOT",
-    "Latitutde": 40.12265214,
+    "Latitude": 40.12265214,
     "Longitude": -74.07707522,
     "Address": "2436 Paynters Road",
     "City": "Wall Township",
@@ -613,7 +601,7 @@
   },
   {
     "Name": "Netcong DOT",
-    "Latitutde": 40.89337617,
+    "Latitude": 40.89337617,
     "Longitude": -74.69634695,
     "Address": "90 Rt. 183 North",
     "City": "Netcong",
@@ -625,7 +613,7 @@
   },
   {
     "Name": "Riverdale DOT",
-    "Latitutde": 40.98956980,
+    "Latitude": 40.98956980,
     "Longitude": -74.30105240,
     "Address": "1 Riverdale Rd. behind National Guard Armory",
     "City": "Riverdale",
@@ -637,7 +625,7 @@
   },
   {
     "Name": "Rockaway DOT",
-    "Latitutde": 40.91857611,
+    "Latitude": 40.91857611,
     "Longitude": -74.58652670,
     "Address": "200 Rt. 15 South MP 3",
     "City": "Wharton",
@@ -649,7 +637,7 @@
   },
   {
     "Name": "Lakewood DOT",
-    "Latitutde": 40.04957180,
+    "Latitude": 40.04957180,
     "Longitude": -74.22339715,
     "Address": "45 Honey Locust Drive behind 84 Lumber",
     "City": "Lakewood",
@@ -661,7 +649,7 @@
   },
   {
     "Name": "Manahawkin DOT",
-    "Latitutde": 39.69451178,
+    "Latitude": 39.69451178,
     "Longitude": -74.26486765,
     "Address": "Rt. 72 at Rt. 9 South to 123 Grassy Hollow Rd.",
     "City": "Manahawkin",
@@ -673,7 +661,7 @@
   },
   {
     "Name": "Toms River DOT",
-    "Latitutde": 39.96805337,
+    "Latitude": 39.96805337,
     "Longitude": -74.23567666,
     "Address": "743 Rt. 37 West ",
     "City": "Toms River",
@@ -685,7 +673,7 @@
   },
   {
     "Name": "Clifton DOT",
-    "Latitutde": 40.838978,
+    "Latitude": 40.838978,
     "Longitude": -74.161580,
     "Address": "Bloomfield Ave East & Isabella St.",
     "City": "Clifton",
@@ -697,7 +685,7 @@
   },
   {
     "Name": "Totowa DOT",
-    "Latitutde": 40.89776431,
+    "Latitude": 40.89776431,
     "Longitude": -74.22975736,
     "Address": "300 Minisink Rd. off Rt. 80 West Bound",
     "City": "Totowa",
@@ -709,7 +697,7 @@
   },
   {
     "Name": "Paterson DOT",
-    "Latitutde": 40.93588669,
+    "Latitude": 40.93588669,
     "Longitude": -74.14187188,
     "Address": "1 McClean Blvd.",
     "City": "Paterson",
@@ -721,7 +709,7 @@
   },
   {
     "Name": "Deepwater DOT",
-    "Latitutde": 39.677937,
+    "Latitude": 39.677937,
     "Longitude": -75.486985,
     "Address": "County Rd. 551 Exit 1C Rt. 295 SB",
     "City": "Deepwater",
@@ -733,7 +721,7 @@
   },
   {
     "Name": "Elmer DOT",
-    "Latitutde": 39.598444,
+    "Latitude": 39.598444,
     "Longitude": -75.149157,
     "Address": "355 Rt. 40 MP 21.5",
     "City": "Pittsgrove",
@@ -745,7 +733,7 @@
   },
   {
     "Name": "Bedminster DOT",
-    "Latitutde": 40.65123677,
+    "Latitude": 40.65123677,
     "Longitude": -74.64499021,
     "Address": "455 Rt. 202/206 South",
     "City": "Pluckemin",
@@ -757,7 +745,7 @@
   },
   {
     "Name": "Bridgewater DOT",
-    "Latitutde": 40.58997095,
+    "Latitude": 40.58997095,
     "Longitude": -74.62639744,
     "Address": "150 Commons Way",
     "City": "Bridgewater ",
@@ -769,7 +757,7 @@
   },
   {
     "Name": "Branchville DOT",
-    "Latitutde": 41.15154413,
+    "Latitude": 41.15154413,
     "Longitude": -74.76831456,
     "Address": "349 Rt. 206",
     "City": "Branchville",
@@ -781,7 +769,7 @@
   },
   {
     "Name": "Lafayette DOT",
-    "Latitutde": 41.09273553,
+    "Latitude": 41.09273553,
     "Longitude": -74.67791503,
     "Address": "38 Rt. 94",
     "City": "Lafayette",
@@ -793,7 +781,7 @@
   },
   {
     "Name": "Sussex DOT",
-    "Latitutde": 41.199888,
+    "Latitude": 41.199888,
     "Longitude": -74.597297,
     "Address": "Rt. 24 North at County Rd. 565",
     "City": "Sussex",
@@ -805,7 +793,7 @@
   },
   {
     "Name": "Summit DOT",
-    "Latitutde": 40.716273,
+    "Latitude": 40.716273,
     "Longitude": -74.329762,
     "Address": "46 Springfield Avenue ",
     "City": "Summit",
@@ -817,7 +805,7 @@
   },
   {
     "Name": "Columbia DOT",
-    "Latitutde": 40.935311,
+    "Latitude": 40.935311,
     "Longitude": -75.101895,
     "Address": "24 Simpson Street",
     "City": "Columbia",
@@ -829,7 +817,7 @@
   },
   {
     "Name": "Port Colden DOT",
-    "Latitutde": 40.76586,
+    "Latitude": 40.76586,
     "Longitude": -74.93224,
     "Address": "619 Rt. 57 behind State Police Building",
     "City": "Port Colden",
@@ -841,7 +829,7 @@
   },
   {
     "Name": "Yellow Frame DOT",
-    "Latitutde": 40.98829409,
+    "Latitude": 40.98829409,
     "Longitude": -74.88516556,
     "Address": "Rt. 94 between Mott Rd. & Kerr Rd.",
     "City": "Marksboro",

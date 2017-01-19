@@ -15,10 +15,17 @@ angular.module('Locations', [])
 .factory('Station', function($http) {
 
 	return {
-		index: function() {
+		index: function(position = null) {
+
+			var parameters = "";
+
+			if(position != null) {
+				parameters = "?lat=" + (position.coords.latitude) + "&lng=" + (position.coords.longitude)
+			}
+
 			return $http({
 				method: 'GET',
-				url: '/api/stations'
+				url: '/api/stations' + parameters
 			})
 		}
 	}
