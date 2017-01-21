@@ -1,9 +1,36 @@
 <div class="container-fluid" style="margin-top: 60px">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			<div class="alert alert-success text-center" role="alert">
-				Coming Soon!
+		<div class="col-md-10 col-md-offset-1">
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="input-group">
+						<span class="input-group-addon">Structure Number</span>
+						<input ng-model="q" type="text" class="form-control" placeholder="ex: '902153'">
+						<span class="input-group-btn">
+							<button class="btn btn-primary" type="button" ng-click="search()">Search</button>
+						</span>
+					</div><!-- /input-group -->
+				</div><!-- /.col-lg-6 -->
 			</div>
+			<hr />
+
+			<table ng-if="bridges.data.length > 0" class="table table-hover text-center" style="table-layout: fixed;">
+				<thead class="text-center">
+					<tr>
+						<th class="text-center">Structure No</th>
+						<th class="text-center">Structure Name</th>
+						<th class="text-center">Go</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="bridge in bridges.data">
+						<td>{{ bridge["STR NO"] }}</td>
+						<td>{{ bridge["Structure Name"] }}</td>
+						<td><a href="http://maps.google.com/?q={{ bridge['Latitude ddmmss.ss'] }},{{ bridge['Longitude ddmmss.ss'] }}">Go</a></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

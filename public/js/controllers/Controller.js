@@ -85,6 +85,19 @@ angular.module('Controller', [])
 	$scope.init();
 
 })
-.controller('BridgesController', function($scope) {
+.controller('BridgesController', function($scope, Bridge) {
+
+	$scope.q = null;
+	$scope.bridges = [];
+
+	$scope.search = function() {
+		console.log("HERE");
+		Bridge.index($scope.q)
+			.then(function(data) {
+				$scope.bridges = data;
+			}, function(data) {
+				console.error("An error has occured.");
+			});
+	}
 
 });

@@ -9,8 +9,21 @@ end
 
 get '/api/bridges' do
 	content_type :json
-	file = File.open('./files/bridges.json')
-	return file
+	file = File.open('./files/bridges.json', 'rb').read
+
+	if !params.key?('q') then
+		return file
+	else
+		query = params['q'].strip
+		data = JSON.parse(file)
+
+		data = data.select { |bridge|
+			bridge["STR NO"].include? query
+		}
+
+		return data.to_json
+	end
+
 end
 
 get '/api/stations' do

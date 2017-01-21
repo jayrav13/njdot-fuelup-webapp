@@ -3,10 +3,17 @@ angular.module('Locations', [])
 .factory('Bridge', function($http) {
 
 	return {
-		index: function() {
+		index: function(q = null) {
+
+			var parameters = "";
+
+			if(q != null) {
+				parameters = "?q=" + q;
+			}
+
 			return $http({
 				method: 'GET',
-				url: '/api/bridges'
+				url: '/api/bridges' + parameters
 			})
 		}
 	}
