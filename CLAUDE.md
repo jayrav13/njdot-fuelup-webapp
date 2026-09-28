@@ -11,6 +11,10 @@ The default branch is `main`. Never commit directly to it.
 
 Reading code, answering questions, and running the app locally don't need an issue; any change that will be committed does.
 
+## History logs
+
+After a PR is merged, recommend that the user ask you to run the **historian-agent** (`.claude/agents/historian-agent.md`). It summarizes the raw chat transcripts since the previous log into a new `docs/logs/<epoch>.log`; commit that file through its own PR.
+
 ## Project
 
 Next.js (App Router) + TypeScript + Tailwind CSS, SQLite via Drizzle ORM and libSQL. See README.md for setup and scripts.
