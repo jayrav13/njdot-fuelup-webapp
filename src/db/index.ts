@@ -5,7 +5,7 @@ import * as schema from "./schema";
 export const DEFAULT_DATABASE_URL = "file:data/fuelup.db";
 
 function createDb() {
-  const client = createClient({ url: process.env.DATABASE_URL ?? DEFAULT_DATABASE_URL });
+  const client = createClient({ url: process.env.DATABASE_URL || DEFAULT_DATABASE_URL });
   return drizzle(client, { schema });
 }
 

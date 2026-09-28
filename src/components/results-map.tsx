@@ -122,7 +122,9 @@ function FitToPoints({ points, userLocation }: { points: MapPoint[]; userLocatio
     const all = points.map((point) => ({ lat: point.latitude, lng: point.longitude }));
     if (userLocation) all.push({ lat: userLocation.latitude, lng: userLocation.longitude });
     if (all.length === 0) return;
-    if (all.length === 1) {
+    // One point, or several at the exact same spot (NJDOT reuses coordinates
+    // for some groups of structures): fitBounds would zoom all the way in.
+    if (all.every((point) => point.lat === all[0].lat && point.lng === all[0].lng)) {
       map.setCenter(all[0]);
       map.setZoom(14);
       return;

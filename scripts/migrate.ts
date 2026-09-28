@@ -8,7 +8,7 @@ import { db, DEFAULT_DATABASE_URL } from "../src/db";
 import { countRecords } from "../src/db/queries";
 import { runMigrations } from "../src/db/migrate";
 
-const url = process.env.DATABASE_URL ?? DEFAULT_DATABASE_URL;
+const url = process.env.DATABASE_URL || DEFAULT_DATABASE_URL;
 if (url === DEFAULT_DATABASE_URL) mkdirSync("data", { recursive: true });
 
 await runMigrations(db);
