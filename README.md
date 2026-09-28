@@ -21,6 +21,8 @@ bundle exec rackup -p 5000
 
 Bridges:
 
+`Latitude ddmmss.ss` / `Longitude ddmmss.ss` are the source data's packed degrees-minutes-seconds values. `Latitude` / `Longitude` are the decoded decimal degrees, or `null` when the source values don't decode to a point in New Jersey.
+
 ```bash
 # All
 
@@ -39,7 +41,9 @@ $ cURL \
     "Latitude ddmmss.ss": 40.453661,
     "Longitude ddmmss.ss": -74.030396,
     "County": "HUDSON",
-    "Municipality": "North Bergen township"
+    "Municipality": "North Bergen township",
+    "Latitude": 40.760169,
+    "Longitude": -74.0511
   },
   ...
 ]
@@ -61,7 +65,9 @@ $ cURL \
     "Latitude ddmmss.ss": 40.56415,
     "Longitude ddmmss.ss": -74.29367,
     "County": "MORRIS",
-    "Municipality": "Rockaway township"
+    "Municipality": "Rockaway township",
+    "Latitude": 40.944861,
+    "Longitude": -74.493528
   }
 ]
 ```

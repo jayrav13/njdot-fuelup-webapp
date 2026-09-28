@@ -27,7 +27,8 @@
 					<tr ng-repeat="bridge in bridges.data">
 						<td>{{ bridge["STR NO"] }}</td>
 						<td>{{ bridge["Structure Name"] }}</td>
-						<td><a href="http://maps.google.com/?q={{ bridge['Latitude ddmmss.ss'] }},{{ bridge['Longitude ddmmss.ss'] }}">Go</a></td>
+						<td ng-if="bridge.Latitude != null"><a href="http://maps.google.com/?q={{ bridge.Latitude }},{{ bridge.Longitude }}">Go</a></td>
+						<td ng-if="bridge.Latitude == null"> - </td>
 					</tr>
 				</tbody>
 			</table>
