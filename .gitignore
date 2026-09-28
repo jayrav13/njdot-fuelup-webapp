@@ -1,1 +1,26 @@
-*.sqlite3
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# testing
+/coverage
+
+# env / secrets (never commit the Maps key)
+.env*
+!.env.example
+.map_key
+
+# database
+/data/*.db
+/data/*.db-*
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+.vercel
