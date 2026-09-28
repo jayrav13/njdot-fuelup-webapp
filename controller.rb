@@ -9,15 +9,13 @@ end
 
 get '/api/bridges' do
 	content_type :json
-	file = File.open('./files/bridges.json', 'rb').read
 
 	if !params.key?('q') then
-		return file
+		return settings.bridges_json
 	else
 		query = params['q'].strip
-		data = JSON.parse(file)
 
-		data = data.select { |bridge|
+		data = settings.bridges.select { |bridge|
 			bridge["STR NO"].include? query
 		}
 
@@ -66,3 +64,46 @@ def distance loc1, loc2
 
 	rm * c * 0.0006213712 # Distance in miles
 end
+
+# => Bridge coordinates
+#
+# => files/bridges.json stores coordinates as packed degrees-minutes-seconds
+# => (DD.MMSSss, per the "ddmmss.ss" column names), e.g. 40.453661 is
+# => 40°45'36.61". A few records are already decimal degrees: any with
+# => minutes >= 60, plus these three, whose digits look like DMS with
+# => overflowing seconds but which only land in the right place as decimal.
+DECIMAL_BRIDGES = ['1227158', '1237159', '122B516']
+NJ_LATITUDES = 38.9..41.4
+NJ_LONGITUDES = -75.6..-73.85
+
+# => Split a packed DD.MMSSss value into [degrees, minutes, seconds].
+def dms_parts value
+	degrees, fraction = format('%.6f', value.abs).split('.')
+	[degrees.to_i, fraction[0, 2].to_i, fraction[2, 4].to_i / 100.0]
+end
+
+def dms_to_decimal value
+	degrees, minutes, seconds = dms_parts value
+	sign = value < 0 ? -1 : 1
+	sign * (degrees + minutes / 60.0 + seconds / 3600.0)
+end
+
+# => Decimal [latitude, longitude] for a bridge, or [nil, nil] when the
+# => source values don't decode to a point in New Jersey.
+def bridge_coordinates bridge
+	lat, lng = bridge["Latitude ddmmss.ss"], bridge["Longitude ddmmss.ss"]
+	return [nil, nil] if lat.nil? or lng.nil?
+
+	decimal = DECIMAL_BRIDGES.include?(bridge["STR NO"]) || [lat, lng].any? { |value| dms_parts(value)[1] >= 60 }
+	lat, lng = dms_to_decimal(lat), dms_to_decimal(lng) unless decimal
+
+	return [nil, nil] unless NJ_LATITUDES.cover?(lat) and NJ_LONGITUDES.cover?(lng)
+	[lat.round(6), lng.round(6)]
+end
+
+# => Load bridges once at boot, adding decimal "Latitude" / "Longitude".
+bridges = JSON.parse(File.read('./files/bridges.json')).each do |bridge|
+	bridge["Latitude"], bridge["Longitude"] = bridge_coordinates bridge
+end
+set :bridges, bridges
+set :bridges_json, bridges.to_json
