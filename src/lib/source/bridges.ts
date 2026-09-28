@@ -1,6 +1,6 @@
 import { decodeBridgeCoordinates } from "../coordinates";
 import { structureNumberKey } from "../structure-number";
-import { parseTsv } from "./tsv";
+import { parseDelimited } from "./delimited";
 
 export type BridgeRecord = {
   structureNumber: string;
@@ -32,13 +32,14 @@ const titleCase = (value: string | null) =>
   value?.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()) ?? null;
 
 /**
- * Parse data/source/bridges.txt, NJDOT's bridge inventory as originally
+ * Parse data/source/bridges.csv, NJDOT's bridge inventory as originally
  * exported on 2017-01-18. (A later re-save through Excel stripped leading zeros
  * from structure numbers and turned IDs like 043E007 into 4.3E+08; this file
- * predates that and keeps the official 7-character numbers.)
+ * predates that and keeps the official 7-character numbers. Don't open and
+ * re-save it in Excel.)
  */
 export function parseBridges(source: string): BridgeRecord[] {
-  return parseTsv(source).map((row) => {
+  return parseDelimited(source).map((row) => {
     const structureNumber = (row["STR NO"] ?? "").trim();
     const sourceLatitude = number(row["Latitude ddmmss.ss"]);
     const sourceLongitude = number(row["Longitude ddmmss.ss"]);

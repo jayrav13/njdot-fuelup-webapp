@@ -74,12 +74,14 @@ curl "http://localhost:3000/api/bridges?q=1400900"
 
 ## Data
 
-The data comes from NJDOT exports dated January 2017, kept verbatim in `data/source/` and imported by the migration `drizzle/0001_import_njdot_2017_data.sql`, which `scripts/generate-data-migration.ts` generates from them. Cleanup rules live in `src/lib/source/` and are covered by tests:
+The data comes from NJDOT exports dated January 2017, kept as CSV in `data/source/` (values verbatim; only the original misspelled `Latitutde` header was corrected) and imported by the migration `drizzle/0001_import_njdot_2017_data.sql`, which `scripts/generate-data-migration.ts` generates from them. Cleanup rules live in `src/lib/source/` and are covered by tests:
 
 - **Bridge coordinates** are packed degrees-minutes-seconds (`DD.MMSSss`, as the `ddmmss.ss` column names say): `40.453661` is 40°45'36.61" = 40.760169°. They're decoded to decimal degrees; `sourceLatitude`/`sourceLongitude` keep the originals. Seven records are already decimal and pass through; 10 records don't decode to anywhere in NJ and get `null` coordinates (no map link).
 - **Structure numbers** are the official 7-character IDs (e.g. `0902153`, `043E007`) from the original export. A later re-save through Excel had stripped leading zeros and turned some IDs into scientific notation, so that copy isn't used.
 - **Stations**: fixed the county for four Burlington County sites (listed as "Bordentown"), trimmed whitespace, and kept Hamilton State Police, which has an address but no coordinates.
 - Apostrophes that the bridge export encoded as underscores (`BERRY_S CREEK`) are restored.
+
+**Don't open and re-save the CSVs in Excel**: it strips leading zeros from structure numbers and turns IDs like `043E007` into scientific notation, which is how the old copy was damaged. A test fails if that happens. Edit them with a text editor, or generate them with a script.
 
 About 40 bridges have coordinates that are wrong at the source but still inside NJ; fixing those needs corrected data from NJDOT. To load a newer export, add it under `data/source/` and create a new custom migration (`npx drizzle-kit generate --custom --name=<name>`) rather than editing the existing one.
 

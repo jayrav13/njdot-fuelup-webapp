@@ -1,4 +1,4 @@
-import { parseTsv } from "./tsv";
+import { parseDelimited } from "./delimited";
 
 export type StationRecord = {
   name: string;
@@ -31,9 +31,9 @@ const number = (value: string | undefined) => {
   return trimmed === "" ? null : Number(trimmed);
 };
 
-/** Parse data/source/stations.txt (NJDOT export, January 2017). */
+/** Parse data/source/stations.csv (NJDOT export, January 2017). */
 export function parseStations(source: string): StationRecord[] {
-  return parseTsv(source).map((row) => {
+  return parseDelimited(source).map((row) => {
     const county = text(row["County"]);
     const fuel = text(row["Type of Gas"]);
     return {
@@ -53,8 +53,7 @@ export function parseStations(source: string): StationRecord[] {
       fuel,
       unleaded: /unleaded/i.test(fuel ?? ""),
       diesel: /diesel/i.test(fuel ?? ""),
-      // The source header misspells this column as "Latitutde".
-      latitude: number(row["Latitutde"] ?? row["Latitude"]),
+      latitude: number(row["Latitude"]),
       longitude: number(row["Longitude"]),
     };
   });
