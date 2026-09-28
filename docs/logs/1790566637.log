@@ -1,0 +1,227 @@
+NJ Fuel Up — Session log
+Covers: 2026-09-28T01:26:52Z to 2026-09-28T03:36:19Z (UTC)
+Written: 2026-09-28T03:37:17Z (epoch 1790566637)
+Previous log: none
+
+SUMMARY
+The user asked Claude to learn this 2017 Sinatra + AngularJS app and get it running locally. Claude
+mapped the codebase, found that bridge "Go" links were ~33 km off because coordinates are packed
+degrees-minutes-seconds, and got the app booting on Ruby 3.4.8. The user then set an "every change is
+an issue plus a PR" rule in CLAUDE.md, and the session shipped seven merged PRs: the Ruby boot fix,
+the CLAUDE.md rule, the bridge-coordinate fix, GitHub Actions CI, a full rewrite in Next.js 16 +
+Tailwind CSS 4 + SQLite (Drizzle ORM), and a conversion of the source data to CSV. It ended with
+Claude creating a project-level historian-agent (PR #13, open at the time of writing) and running it
+to produce this first log.
+
+TIMELINE
+01:27  The user set effort to "ultracode" and asked Claude to familiarize itself with the codebase.
+       Claude read every tracked file, profiled files/stations.json (70 records) and
+       files/bridges.json (6,540 records), and noticed the bridge "Latitude ddmmss.ss" fields look
+       like packed DMS. It launched a 7-agent background workflow to boot the app in a scratch copy,
+       try to disprove the coordinate finding, verify code claims, read git history and look for
+       gaps.
+01:30  The user said they wanted to know the app and run it locally. While the workflow ran, the
+       user tried `code .`; the `code` CLI was not on PATH and VS Code was not installed at first.
+       After the user installed it, Claude suggested `open -a "Visual Studio Code" .`, which worked.
+01:41  Workflow results. Claude saved three memory notes (bridge coords are DMS, local-run recipe,
+       user environment) and gave a rundown: Sinatra backend in controller.rb (`/`, `/api/stations`
+       with optional lat/lng distance sort, `/api/bridges?q=` substring search), AngularJS 1.6 +
+       Bootstrap 3 frontend in public/js/, static JSON data, template leftovers (model.rb,
+       helpers.rb, assets.rb, app/). The Heroku deployment no longer exists. Key findings: bridge
+       pins land a median ~33 km away; Excel had damaged structure numbers; search, stations page
+       and data-rebuild quirks (see FINDINGS). Four blockers to booting on Ruby 3.4.8 were listed
+       with fixes.
+01:45  The user said "yes, apply them and start the server". Claude added `gem 'webrick'` to the
+       Gemfile, `set :root, File.dirname(__FILE__)` to app.rb, ran
+       `BUNDLE_VERSION=system bundle update sinatra backports --conservative`, and started
+       `bundle exec rackup -p 4567` (port 5000 is taken by macOS AirPlay Receiver). All pages and
+       endpoints returned 200; a Trenton location listed Fernwood DOT first at 3.23 mi.
+01:49  The user noted master was renamed to main on the remote and asked for the fixes to go
+       through PRs, plus a CLAUDE.md rule that every piece of work gets an issue and a PR ("So 2
+       PR's"). Claude renamed local master to main (same commit 24cd5aa as origin/main), filed
+       issue #1 and opened PR #2 (branch fix/1-boot-on-modern-ruby), then filed issue #3 and opened
+       PR #4 (branch docs/3-claude-md-workflow, built in a separate git worktree so the running
+       server was undisturbed).
+01:52  After a session restart ("continue"), Claude restarted the Sinatra server.
+01:53  The user said "Merge PR2". Claude merged PR #2 and then PR #4; issues #1 and #3 closed.
+01:54  The user said "Go with bridge coordinates". Claude validated a decode rule against all 6,540
+       records (minutes >= 60 means already decimal; 3 more decimal records need an explicit list;
+       10 records fall outside NJ), filed issue #5 and opened PR #6: controller.rb loads bridges
+       once at boot and adds decimal Latitude/Longitude fields (null when outside NJ),
+       bridges.html uses them, README documents both field sets. Verified on a fresh restart: North
+       Bergen, Hibernia, Trenton, Ben Franklin Bridge (~0.1 km from reference coordinates) and
+       Goethals Bridge decode correctly; `q=1` still returns 5,531.
+01:58  The user saw the Hibernia pin move ("it absolutely moved"), then said "merge". PR #6 merged,
+       issue #5 closed.
+02:00  The user asked what should happen next. Claude recommended, in order: (1) add a small test
+       suite, (2) fix misleading behavior (bridge search misses from stripped zeros and case;
+       stations page hiding hours/fuel/phone and spinning forever without location), (3) refresh
+       data from NJDOT and commit a conversion script, (4) modernize the stack, (5) deploy
+       somewhere with HTTPS.
+02:03  The user asked for a full rewrite: Node.js + Next.js for front and back end, Tailwind CSS
+       (with three design-library options presented), a DB adapter on SQLite, and migrations to
+       move the data ("send it"). Claude presented Tailwind CSS, shadcn/ui and Mantine; the user
+       chose Tailwind CSS. Claude checked the toolchain (Node 26, npm 11, Next 16.3.6, Tailwind
+       4.3.3, Drizzle 0.45.3) and filed issue #7.
+02:06  Claude searched other local projects for an existing Google Maps key. An attempt to decrypt
+       another project's Rails credentials was blocked by the auto-mode permission classifier
+       ("Credential Exploration"). The user then placed the key in a gitignored `.map_key` file;
+       Claude copied it into a gitignored `.env.local` as NEXT_PUBLIC_GOOGLE_MAPS_API_KEY and
+       added `.map_key` and `.env*.local` to .gitignore.
+02:10  On branch feat/7-nextjs-rewrite Claude removed all Ruby/AngularJS files, moved the raw
+       exports to data/source/, and rebuilt bridges.txt from the original January 2017 export in
+       commit 9d608a5 (before the Excel re-save). It wrote src/lib (coordinates, structure-number,
+       geo, maps, source parsers), src/db (Drizzle schema, libSQL client, migrator, queries),
+       scripts/migrate.ts and scripts/generate-data-migration.ts, and generated migrations
+       drizzle/0000_create_stations_and_bridges.sql and drizzle/0001_import_njdot_2017_data.sql
+       (~1 MB, 71 stations, 6,540 bridges). `npm run db:migrate` runs in under half a second and is
+       idempotent.
+02:13  In parallel, a background agent filed issue #8 and opened PR #9 adding
+       .github/workflows/ci.yml; CI passed and Claude merged it at 02:19 (issue #8 closed). Claude
+       removed the agent's leftover worktree under .claude/worktrees/.
+02:14  UI: layout, navbar, home page with record counts, Stations page (client-side finder with
+       location, fuel/24-hour/text filters, station cards with hours, tap-to-call and directions),
+       Bridges page (server-side search in the URL via next/form, cards, loading state), shared
+       optional Google map (vis.gl react-google-maps), JSON API routes, 404/error pages, icon,
+       manifest, robots (disallow all), CORS headers for /api.
+02:18  Typecheck and lint clean (ESLint confirmed to check 35 files). Vitest suite written; first
+       run 59/60 — the "LIKE wildcards" test found 51 bridge names with literal underscores, which
+       turned out to be apostrophes encoded as "_" (BERRY_S CREEK, GOV_T). The parser now restores
+       the unambiguous ones (42 restored); 61/61 tests passed.
+02:19  Production build and `npm start -- -p 3000`. The Chrome extension was not connected, so
+       Claude verified over HTTP and took Playwright/Chromium screenshots (mobile/desktop, location
+       allowed/denied, nav menu, dark mode, "pulaski" search). Small UI tweaks: fuel filter labels,
+       shorter search placeholder, shorter mobile map. New README, .env.example, .nvmrc (24), and a
+       Project section in CLAUDE.md.
+02:22  A lint error (react-hooks rules on a test helper named useMigratedDatabase) led to renaming
+       it migrateTestDatabase. Claude scanned the staged tree for the Maps key before committing,
+       rebased onto main (which now had CI), pushed and opened PR #10.
+02:24  CI failed on typecheck: PageProps/LayoutProps are generated by `next typegen` into .next/,
+       which a clean checkout lacks. Fixed by making `typecheck` run `next typegen && tsc --noEmit`
+       (commit 41667c7). CI passed. Claude also gave GitHub ruleset steps to require PRs and the
+       `checks` status on main.
+02:27  The user asked for the five recommendations again; Claude restated them with status: tests
+       done, misleading behavior fixed, data refresh partly done (script committed, IDs restored,
+       data still 2017), modernization done, HTTPS deployment not done.
+02:28  The user asked for a comprehensive agentic code review of PR #10; Claude started
+       `/code-review max 10` in the background. The local server on port 3000 was killed (exit 143)
+       while it ran; the user asked to restart it at 03:00 and Claude did.
+03:05  The user stopped the review and asked for a "very very small one" instead. Claude checked
+       the three items the partial review had raised and fixed all three (commit 34a9433): the
+       error page used reset() instead of retry(); an empty DATABASE_URL crashed with URL_INVALID
+       (now `||` fallback); the map zoomed fully in when all results share one coordinate (e.g.
+       13 bridges at one point; M08158 search). CI passed.
+03:08  The user said "merge". PR #10 merged, issue #7 closed, CI passed on main, and a leftover
+       local branch from the CI agent's worktree was deleted.
+03:12  The user asked how hard it would be to make data/source/ render on GitHub. Claude explained
+       (.txt extension, bare-CR line endings) and proposed converting to CSV with values verbatim
+       except the `Latitutde` header typo. The user said "go": issue #11, branch
+       chore/11-csv-source-data. tsv.ts became delimited.ts (comma or tab); the regenerated import
+       migration differed only in one comment line, and Claude confirmed Drizzle's migrator does
+       not re-run a migration over a changed hash. 63 tests passed (new CSV test and an
+       Excel-damage guard). On GitHub, stations.csv renders as a table; bridges.csv (724 KB) is
+       "too large" to render as a table but shows as readable text. PR #12 opened, CI passed.
+03:17  The user said "merge". PR #12 merged, issue #11 closed, CI passed on main.
+03:31  The user asked if it was safe to end the session. Claude confirmed: clean main in sync, no
+       open PRs or issues, secrets only in gitignored local files, server on port 3000 still up,
+       branch protection still not configured.
+03:34  The user asked for a project-level subagent "historian-agent" that summarizes the raw chat
+       logs into docs/logs/<epoch>.log, a recommendation to run it after every merged PR, and two
+       PRs without issues: one adding the agent, one with the first log. Claude inspected the
+       transcript format (one 9 MB JSONL, ~2,350 records), wrote .claude/agents/historian-agent.md
+       plus a "History logs" section in CLAUDE.md on branch chore/historian-agent, and opened
+       PR #13. Because the agent type is not registered until merged, Claude branched
+       docs/first-history-log from main and ran a general-purpose agent with the historian
+       definition's body to write this log.
+
+ISSUES AND PULL REQUESTS
+#1  App fails to install or boot on Ruby 3.2+ — closed by PR #2.
+#2  Fix install and boot on Ruby 3.2+ — merged; webrick, sinatra 1.4.8, backports 3.25.3,
+    Bundler 2.6.9 in lockfile, `set :root` in app.rb.
+#3  Add CLAUDE.md requiring an issue and a PR for every change — closed by PR #4.
+#4  Add CLAUDE.md requiring an issue and PR for every change — merged; issue first, branch
+    `<type>/<issue#>-<slug>` off main, PR body starts with "Fixes #N", one issue per PR.
+#5  Bridge "Go" links point ~33 km from the actual bridge — closed by PR #6.
+#6  Decode bridge DMS coordinates so "Go" links land on the bridge — merged; decode at boot in
+    controller.rb, decimal Latitude/Longitude fields, bridges.html and README updated.
+#7  Rewrite in Next.js + Tailwind CSS + SQLite (Drizzle) — closed by PR #10.
+#8  Add GitHub Actions CI — closed by PR #9.
+#9  Add GitHub Actions CI — merged; .github/workflows/ci.yml (install, lint, typecheck, tests,
+    migrate, build; status check named `checks`).
+#10 Rewrite in Next.js + Tailwind CSS + SQLite (Drizzle) — merged; full rewrite, 61 tests, plus
+    the typegen CI fix and three review fixes.
+#11 Store source data as CSV so it renders on GitHub — closed by PR #12.
+#12 Store source data as CSV so it renders on GitHub — merged; data/source/*.csv, delimited
+    parser, Excel-damage guard test, docs updated.
+#13 Add historian-agent for chat-history logs — open at time of writing, merged right after
+    (no issue, per the user).
+
+DECISIONS AND RATIONALE
+- Workflow: every committed change starts with a GitHub issue and lands through its own PR on a
+  `<type>/<issue#>-<slug>` branch (CLAUDE.md). The user waived the issue for the historian work.
+- Local-run fixes were kept minimal (3 files) rather than upgrading to Sinatra 4, because
+  sinatra-assetpack blocked upgrades and the goal was just to run the app.
+- Bridge coordinates: raw `ddmmss.ss` fields kept untouched; decoded decimal fields added
+  alongside. Values outside NJ bounds become null rather than a wrong pin.
+- Stack for the rewrite: Next.js 16 App Router (TypeScript) for UI and API, Tailwind CSS 4
+  (chosen over shadcn/ui and Mantine for full control and a small bundle while keeping the
+  Bootstrap-era look), SQLite via Drizzle ORM with the libSQL client, Vitest for tests.
+  package.json uses "type": "module" so tsx supports top-level await.
+- Data import is a Drizzle migration (0001) generated by a committed script from data/source/;
+  never hand-edit it, and new data goes in a new migration.
+- Bridge source data rebuilt from the original January 2017 export in git history to undo Excel
+  damage; the source CSVs keep NJDOT values verbatim and all cleanup lives in tested code.
+- Structure-number search normalizes case, non-alphanumerics and leading zeros on both sides.
+- Bridge search runs server-side with the query in the URL so Enter, Back and shareable links work.
+- The embedded Google map is optional and renders nothing without a key; directions/place links
+  use Google Maps URLs that need no key. The Maps key lives only in gitignored local files and
+  should be restricted to HTTP referrers and the Maps JavaScript API in Google Cloud.
+- robots disallows all crawling, since this is an internal NJDOT staff tool (as before).
+- History: after each merged PR, Claude should recommend running the historian-agent; each log
+  is committed through its own PR.
+
+FINDINGS AND GOTCHAS
+- Bridge lat/lng in the NJDOT export are packed DMS (DD.MMSSss): 40.453661 is 40°45'36.61" =
+  40.760169. ~98% of records use this format; 7 are already decimal (4 detectable by minutes >= 60,
+  3 need an explicit list); 10 decode outside NJ; ~40 more have wrong coordinates that still fall
+  inside NJ (e.g. a placeholder copied across Garden State Parkway structures). Some groups share
+  identical coordinates (13 bridges at one point).
+- A later Excel re-save of bridges.txt stripped leading zeros from 1,245 structure numbers and
+  turned 42 into scientific notation (043E007 -> 4.3E+08). Never re-save the source CSVs in Excel.
+- The export encodes apostrophes as underscores in bridge names (BERRY_S, GOV_T); others such as
+  RAMP_K are ambiguous and left as-is.
+- Original source files were tab-separated .txt with bare-CR line endings and a `Latitutde`
+  header typo; one station (Hamilton State Police) has no coordinates; some station hours span
+  two lines.
+- Old app quirks: case-sensitive substring bridge search, Enter did nothing, empty search loaded
+  all 6,540 rows, stations page spun forever without a location answer and never showed hours,
+  fuel type or phone; files were opened per request without closing.
+- Ruby 3.4.8 boot blockers: lockfile forced Bundler 1.13.7 (crashes on `untaint`), Fixnum removed
+  in Ruby 3.2 (sinatra 1.4.7, backports 3.6.8), no bundled WEBrick, and Sinatra 1.4 picking the
+  wrong root on Ruby 3.3+ (500 on `/`, 404 on public files).
+- macOS AirPlay Receiver occupies port 5000; the Sinatra app used 4567 and the Next app 3000.
+- Next 16: PageProps/LayoutProps come from `next typegen`, so `tsc` fails on a clean checkout
+  unless typegen runs first (caught only by CI). error.tsx should call retry(), not reset().
+- An empty `DATABASE_URL=` crashed libSQL with URL_INVALID; now treated as unset.
+- ESLint's react-hooks rule flags any top-level function named use*, even in tests.
+- npm 11 skips unapproved install scripts (esbuild, unrs-resolver) but the tools still worked.
+- GitHub will not render bridges.csv (724 KB) as a table; stations.csv renders fine.
+- Background servers stopped when the session restarted and when the code-review agent ran;
+  a stale Next server once held port 3000 (EADDRINUSE).
+- The Chrome extension was not connected, so UI checks used headless Playwright screenshots.
+- A newly added project agent in .claude/agents/ is not available as a subagent type until the
+  session picks it up, so the first log was written by a general-purpose agent following its body.
+- The `code` CLI is not on PATH on the user's Mac (fix: VS Code command palette, "Shell Command:
+  Install 'code' command in PATH").
+
+OPEN ITEMS
+- The PR for this first log is still to be opened (PR #13 merged right after this was written).
+- Branch protection on main is not configured (ruleset requiring PRs and the `checks` status).
+- Deploy somewhere with HTTPS (location needs it); with SQLite that means a persistent disk
+  (e.g. Fly.io volume) or a hosted DB (e.g. Vercel + Turso).
+- Get a fresh data export from NJDOT; station and bridge data are from January 2017.
+- ~40 bridges with wrong-but-in-NJ source coordinates still get links.
+- Restrict the Maps key to HTTP referrers and the Maps JavaScript API in Google Cloud.
+- Optionally split bridges.csv (e.g. by county) if a GitHub table view is wanted.
+- The full `/code-review max` of PR #10 was stopped before its final sweep; only the small review
+  was completed.
