@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1790561649471,
+      "tag": "0000_create_stations_and_bridges",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1790561649799,
+      "tag": "0001_import_njdot_2017_data",
+      "breakpoints": true
+    }
+  ]
+}
