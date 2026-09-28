@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
+
+jobs:
+  checks:
+    # Keep this name stable: it is used as a required status check.
+    name: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Detect JS project
+        id: detect
+        run: |
+          if [ -f package.json ]; then
+            echo "has_package_json=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_package_json=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No package.json yet — skipping JS checks"
+          fi
+          if [ -f package-lock.json ]; then
+            echo "has_lockfile=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_lockfile=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up Node.js
+        if: steps.detect.outputs.has_package_json == 'true'
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          # setup-node's npm cache fails without a lockfile, so only enable it when one exists.
+          cache: ${{ steps.detect.outputs.has_lockfile == 'true' && 'npm' || '' }}
+          package-manager-cache: ${{ steps.detect.outputs.has_lockfile == 'true' }}
+
+      - name: Install dependencies (npm ci)
+        if: steps.detect.outputs.has_package_json == 'true'
+        run: npm ci
+
+      - name: Lint
+        if: steps.detect.outputs.has_package_json == 'true'
+        run: npm run lint
+
+      - name: Typecheck
+        if: steps.detect.outputs.has_package_json == 'true'
+        run: npm run typecheck
+
+      - name: Test
+        if: steps.detect.outputs.has_package_json == 'true'
+        run: npm test
+
+      - name: Migrate database
+        if: steps.detect.outputs.has_package_json == 'true'
+        run: npm run db:migrate
+
+      - name: Build
+        if: steps.detect.outputs.has_package_json == 'true'
+        run: npm run build
