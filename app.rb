@@ -13,6 +13,7 @@ require './helpers'
 Bundler.require(:default)
 
 configure do
+	set :root, File.dirname(__FILE__)
 	enable :sessions
 	set :json_encoder, :to_json
 	set :erb, :layout => false, :format => :html5

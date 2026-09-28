@@ -6,6 +6,7 @@ gem 'sinatra-assetpack'
 gem 'sinatra-static-assets'
 gem 'sinatra-flash'
 gem 'rack'
+gem 'webrick'
 
 group :development do 
 	gem 'dm-sqlite-adapter'
