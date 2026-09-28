@@ -17,7 +17,7 @@ Next.js (App Router) + TypeScript + Tailwind CSS, SQLite via Drizzle ORM and lib
 
 - Before opening a PR, run `npm run lint && npm run typecheck && npm test && npm run build` (CI runs the same, plus `npm run db:migrate`).
 - Never commit secrets: the Google Maps key lives in `.env.local` (and `.map_key` locally), both gitignored.
-- Data: `data/source/*.txt` are the raw NJDOT exports; `drizzle/0001_import_njdot_2017_data.sql` is generated from them by `npm run db:generate-data`. Don't hand-edit it; change the parsers in `src/lib/source/` and regenerate. New data goes in a new migration.
+- Data: `data/source/*.csv` are the NJDOT exports (values verbatim; never re-save them through Excel, which strips leading zeros from structure numbers); `drizzle/0001_import_njdot_2017_data.sql` is generated from them by `npm run db:generate-data`. Don't hand-edit it; change the parsers in `src/lib/source/` and regenerate. New data goes in a new migration.
 - Bridge coordinates in the source are packed DMS (`DD.MMSSss`), decoded in `src/lib/coordinates.ts`; structure numbers are 7-character strings with leading zeros, searched via `structureNumberKey`.
 
 @AGENTS.md

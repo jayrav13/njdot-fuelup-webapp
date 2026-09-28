@@ -1,10 +1,10 @@
 /**
- * Parse tab-separated text as exported by Excel: records end with CR, LF or
- * CRLF (the NJDOT exports use bare CR), and fields may be wrapped in double
- * quotes, with "" as an escaped quote and line breaks allowed inside.
- * Returns one object per data row, keyed by the header row.
+ * Parse delimited text (CSV by default; pass "\t" for TSV). Records may end
+ * with LF, CRLF or bare CR, and fields may be wrapped in double quotes, with
+ * "" as an escaped quote and line breaks allowed inside. Returns one object
+ * per data row, keyed by the header row.
  */
-export function parseTsv(text: string): Record<string, string>[] {
+export function parseDelimited(text: string, delimiter = ","): Record<string, string>[] {
   const rows: string[][] = [];
   let row: string[] = [];
   let field = "";
@@ -23,7 +23,7 @@ export function parseTsv(text: string): Record<string, string>[] {
       }
     } else if (char === '"' && field === "") {
       quoted = true;
-    } else if (char === "\t") {
+    } else if (char === delimiter) {
       row.push(field);
       field = "";
     } else if (char === "\r" || char === "\n") {
